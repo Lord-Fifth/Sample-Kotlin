@@ -14,17 +14,13 @@ class MainActivity : AppCompatActivity() {
 
         showRegistration()
 
-        register.setOnClickListener {
-            register.visibility=View.GONE
+        submit.setOnClickListener {
             OAuth.visibility=View.VISIBLE
-            OTP.visibility=View.VISIBLE
         }
-
     }
 
     private fun showRegistration(){
         OAuth.visibility=View.GONE
-        OTP.visibility=View.GONE
     }
 
 }
