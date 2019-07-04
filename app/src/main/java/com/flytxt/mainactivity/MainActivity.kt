@@ -15,18 +15,16 @@ class MainActivity : AppCompatActivity() {
         showRegistration()
 
         register.setOnClickListener {
-            showAuthorisation()
+            register.visibility=View.GONE
+            OAuth.visibility=View.VISIBLE
+            OTP.visibility=View.VISIBLE
         }
 
     }
 
     private fun showRegistration(){
-        authorise_layout.visibility=View.GONE
-        start_101.visibility=View.VISIBLE
+        OAuth.visibility=View.GONE
+        OTP.visibility=View.GONE
     }
 
-    private fun showAuthorisation(){
-        authorise_layout.visibility=View.VISIBLE
-        start_101.visibility=View.VISIBLE
-    }
 }

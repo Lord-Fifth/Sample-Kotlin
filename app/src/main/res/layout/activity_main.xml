@@ -10,12 +10,11 @@
     <LinearLayout android:id="@+id/start_101"
                   android:layout_width="match_parent"
                   android:layout_height="match_parent"
+                  android:layout_margin="30dp"
                   android:orientation="vertical"
-                  android:layout_centerInParent="true"
-                  android:layout_margin="30dp">
+                  android:gravity="center">
 
         <EditText
-                android:paddingTop="125dp"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:hint="Email"
@@ -26,13 +25,21 @@
         <Button android:id="@+id/register"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:text="REGISTER"/>
 
-    </LinearLayout>
+        <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:ems="10"
+                android:id="@+id/OAuth"
+                android:hint="Enter OTP"/>
 
-    <include android:id="@+id/authorise_layout"
-             layout="@layout/user_authorise"
-             android:visibility="gone"/>
+        <Button android:id="@+id/OTP"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Verify"/>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
