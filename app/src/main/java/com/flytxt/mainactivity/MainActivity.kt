@@ -1,6 +1,7 @@
 package com.flytxt.mainactivity
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -16,6 +17,10 @@ class MainActivity : AppCompatActivity() {
 
         submit.setOnClickListener {
             OAuth.visibility=View.VISIBLE
+            submit.setOnClickListener {
+                val intent = Intent(this,Success::class.java)
+                startActivity(intent)
+            }
         }
     }
 
