@@ -16,4 +16,12 @@
               android:id="@+id/resultTv"
               android:layout_margin="40sp"/>
 
+    <Button android:id="@+id/logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Logout"
+            android:background="@color/colorPrimary"
+            android:textColor="#ffffff"/>
+
 </RelativeLayout>

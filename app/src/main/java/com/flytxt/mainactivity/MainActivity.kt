@@ -1,42 +1,55 @@
 package com.flytxt.mainactivity
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+    lateinit var session: SessionManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        session = SessionManager(applicationContext)
+        if (session.isLoggedIn())
+        {
+            var i = Intent(applicationContext,Success::class.java)
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(i)
+            finish()
+        }
+
         //Get text from EditText
-        val emailEt = findViewById<EditText>(R.id.email)
+        val emailEt = findViewById<EditText>(R.id.email101)
         val otp = findViewById<EditText>(R.id.OAuth)
         val subBtn = findViewById<Button>(R.id.submit)
 
         showRegistration()
 
         subBtn.setOnClickListener {
-            email.isEnabled=false
+            email101.isEnabled = false
             val email = emailEt.text.toString()
 
-            OAuth.visibility=View.VISIBLE
+            OAuth.visibility = View.VISIBLE
 
             subBtn.setOnClickListener {
                 val auth = otp.text.toString()
 
                 //Intent to start activity
-                val intent = Intent(this,Success::class.java)
+                session.createLoginSession(email,auth)
+                val intent = Intent(this, Success::class.java)
 
-                intent.putExtra("Email",email)
-                intent.putExtra("Token",auth)
+                intent.putExtra("Email", email)
+                intent.putExtra("Token", auth)
 
                 startActivity(intent)
+                finish()
             }
         }
     }
