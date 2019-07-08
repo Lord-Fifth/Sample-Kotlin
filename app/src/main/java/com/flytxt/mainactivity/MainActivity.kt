@@ -71,7 +71,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun showRegistration(){
+    private fun showRegistration() {
         OAuth.visibility=View.GONE
     }
 
