@@ -1,5 +1,6 @@
 package com.flytxt.mainactivity
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -8,11 +9,12 @@ import android.provider.ContactsContract
 import kotlin.jvm.internal.PropertyReference0Impl
 
 class SessionManager {
-    lateinit var pref: SharedPreferences
-    lateinit var editor: SharedPreferences.Editor
-    lateinit var con: Context
+    private var pref: SharedPreferences
+    private var editor: SharedPreferences.Editor
+    var con: Context
     var PRIVATE_MODE: Int = 0
 
+    @SuppressLint("CommitPrefEdits")
     constructor(con: Context) {
         this.con = con
         pref = con.getSharedPreferences(PREF_NAME,PRIVATE_MODE)
@@ -38,7 +40,7 @@ class SessionManager {
     {
         if (!this.isLoggedIn())
         {
-            var i = Intent(con,MainActivity::class.java)
+            val i = Intent(con,MainActivity::class.java)
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             con.startActivity(i)
@@ -47,9 +49,9 @@ class SessionManager {
 
     fun getUserDetails(): HashMap<String,String>
     {
-        var user: Map<String,String> = HashMap<String,String>()
-        (user as HashMap).put(KEY_EMAIL, pref.getString(KEY_EMAIL,null).toString())
-        (user as HashMap).put(KEY_TOKEN, pref.getString(KEY_TOKEN,null).toString())
+        val user: Map<String,String> = HashMap()
+        (user as HashMap)[KEY_EMAIL] = pref.getString(KEY_EMAIL,null).toString()
+        user[KEY_TOKEN] = pref.getString(KEY_TOKEN,null).toString()
         return user
     }
 
@@ -58,7 +60,7 @@ class SessionManager {
         editor.clear()
         editor.commit()
 
-        var i = Intent(activity,MainActivity::class.java)
+        val i = Intent(activity,MainActivity::class.java)
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         activity.startActivity(i)
         activity.finish()
