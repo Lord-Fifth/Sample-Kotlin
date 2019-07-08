@@ -2,13 +2,14 @@ package com.flytxt.mainactivity
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.TextUtils
+import android.util.Patterns
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import java.util.regex.Pattern
 
 class MainActivity : AppCompatActivity() {
     lateinit var session: SessionManager
@@ -37,14 +38,14 @@ class MainActivity : AppCompatActivity() {
         subBtn.setOnClickListener {
             val email = emailEt.text.toString()
 
-            if (email.trim().isNotEmpty() && isEmailValid(email))
+            if (isEmailValid(email))
             {
                 email101.isEnabled = false
                 OAuth.visibility = View.VISIBLE
                 subBtn.setOnClickListener {
                     val auth = otp.text.toString()
 
-                    if (auth.trim().isNotEmpty()) {
+                    if (auth.trim().isNotEmpty() && auth.trim().length < 5) {
                         //Intent to start activity
                         session.createLoginSession(email, auth)
                         val intent = Intent(this, Success::class.java)
@@ -58,7 +59,7 @@ class MainActivity : AppCompatActivity() {
 
                     else
                     {
-                        Toast.makeText(this,"No Credentials...\n Enter OTP",Toast.LENGTH_LONG).show()
+                        Toast.makeText(this,"No Credentials.\n Enter OTP",Toast.LENGTH_LONG).show()
                     }
                 }
             }
@@ -75,10 +76,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun isEmailValid(email:String):Boolean {
-        val expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$"
-        val pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE)
-        val matcher = pattern.matcher(email)
-        return matcher.matches()
+        if (TextUtils.isEmpty(email))
+        {
+            return false
+        }
+        else
+        {
+            return Patterns.EMAIL_ADDRESS.matcher(email).matches()
+        }
     }
 
 }
