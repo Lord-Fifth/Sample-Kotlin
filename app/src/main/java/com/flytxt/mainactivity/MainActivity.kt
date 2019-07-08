@@ -8,6 +8,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.regex.Pattern
 
 class MainActivity : AppCompatActivity() {
     lateinit var session: SessionManager
@@ -36,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         subBtn.setOnClickListener {
             val email = emailEt.text.toString()
 
-            if (email.trim().isNotEmpty())
+            if (email.trim().isNotEmpty() && isEmailValid(email))
             {
                 email101.isEnabled = false
                 OAuth.visibility = View.VISIBLE
@@ -73,13 +74,11 @@ class MainActivity : AppCompatActivity() {
         OAuth.visibility=View.GONE
     }
 
-    /*
     private fun isEmailValid(email:String):Boolean {
         val expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$"
         val pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE)
         val matcher = pattern.matcher(email)
         return matcher.matches()
     }
-    */
 
 }
