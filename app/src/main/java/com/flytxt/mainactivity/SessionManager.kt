@@ -1,5 +1,6 @@
 package com.flytxt.mainactivity
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -52,15 +53,15 @@ class SessionManager {
         return user
     }
 
-    fun LogoutUser()
+    fun logoutUser(activity: Activity)
     {
         editor.clear()
         editor.commit()
 
-        var i = Intent(con,MainActivity::class.java)
+        var i = Intent(activity,MainActivity::class.java)
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        con.startActivity(i)
+        activity.startActivity(i)
+        activity.finish()
     }
 
     fun isLoggedIn(): Boolean

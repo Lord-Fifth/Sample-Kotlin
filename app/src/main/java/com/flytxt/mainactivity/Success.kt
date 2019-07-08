@@ -36,7 +36,7 @@ class Success : AppCompatActivity() {
         resultTv.text = "Email : $email\nToken : $token"
 
         outBtn.setOnClickListener{
-            session.LogoutUser()
+            session.logoutUser(this)
         }
 
     }

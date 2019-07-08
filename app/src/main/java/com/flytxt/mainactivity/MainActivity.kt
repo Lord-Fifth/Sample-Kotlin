@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -33,23 +34,37 @@ class MainActivity : AppCompatActivity() {
         showRegistration()
 
         subBtn.setOnClickListener {
-            email101.isEnabled = false
             val email = emailEt.text.toString()
 
-            OAuth.visibility = View.VISIBLE
+            if (email.trim().isNotEmpty())
+            {
+                email101.isEnabled = false
+                OAuth.visibility = View.VISIBLE
+                subBtn.setOnClickListener {
+                    val auth = otp.text.toString()
 
-            subBtn.setOnClickListener {
-                val auth = otp.text.toString()
+                    if (auth.trim().isNotEmpty()) {
+                        //Intent to start activity
+                        session.createLoginSession(email, auth)
+                        val intent = Intent(this, Success::class.java)
 
-                //Intent to start activity
-                session.createLoginSession(email,auth)
-                val intent = Intent(this, Success::class.java)
+                        intent.putExtra("Email", email)
+                        intent.putExtra("Token", auth)
 
-                intent.putExtra("Email", email)
-                intent.putExtra("Token", auth)
+                        startActivity(intent)
+                        finish()
+                    }
 
-                startActivity(intent)
-                finish()
+                    else
+                    {
+                        Toast.makeText(this,"No Credentials...\n Enter OTP",Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+
+            else
+            {
+                Toast.makeText(this,"Invalid Credentials.\n Please enter Email",Toast.LENGTH_LONG).show()
             }
         }
     }
