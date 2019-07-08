@@ -76,13 +76,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun isEmailValid(email:String):Boolean {
-        if (TextUtils.isEmpty(email))
-        {
-            return false
-        }
-        else
-        {
-            return Patterns.EMAIL_ADDRESS.matcher(email).matches()
+        return if (TextUtils.isEmpty(email)) {
+            false
+        } else {
+            Patterns.EMAIL_ADDRESS.matcher(email).matches()
         }
     }
 

@@ -16,13 +16,6 @@ class Success : AppCompatActivity() {
 
         session  = SessionManager(applicationContext)
 
-        /*
-        //Get data from intent
-        val intent = intent
-        val name = intent.getStringExtra("Email")
-        val token = intent.getStringExtra("Token")
-        */
-
         //TextView
         val resultTv = findViewById<TextView>(R.id.resultTv)
         val outBtn = findViewById<Button>(R.id.logout)
