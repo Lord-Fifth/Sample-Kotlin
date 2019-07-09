@@ -5,14 +5,12 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.provider.ContactsContract
-import kotlin.jvm.internal.PropertyReference0Impl
 
 class SessionManager {
     private var pref: SharedPreferences
     private var editor: SharedPreferences.Editor
-    var con: Context
-    var PRIVATE_MODE: Int = 0
+    private var con: Context
+    private var PRIVATE_MODE: Int = 0
 
     @SuppressLint("CommitPrefEdits")
     constructor(con: Context) {
@@ -22,10 +20,10 @@ class SessionManager {
     }
 
     companion object {
-        val PREF_NAME: String = "Kotlin_Sample"
-        val IS_LOGIN: String = "isLoggedIn"
-        val KEY_EMAIL: String = "email"
-        val KEY_TOKEN: String = "token"
+        const val PREF_NAME: String = "Kotlin_Sample"
+        const val IS_LOGIN: String = "isLoggedIn"
+        const val KEY_EMAIL: String = "email"
+        const val KEY_TOKEN: String = "token"
     }
 
     fun createLoginSession(email: String,token: String)

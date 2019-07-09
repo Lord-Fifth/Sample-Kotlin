@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
 class Success : AppCompatActivity() {
-    lateinit var session: SessionManager
+    private lateinit var session: SessionManager
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -43,9 +43,10 @@ class MainActivity : AppCompatActivity() {
                 email101.isEnabled = false
                 OAuth.visibility = View.VISIBLE
                 subBtn.setOnClickListener {
-                    val auth = otp.text.toString()
+                    var auth = otp.text.toString()
+                    auth = auth.trim()
 
-                    if (auth.trim().isNotEmpty() && auth.trim().length < 5) {
+                    if (auth.isNotEmpty() && auth.length == 4) {
                         //Intent to start activity
                         session.createLoginSession(email, auth)
                         val intent = Intent(this, Success::class.java)
@@ -59,7 +60,7 @@ class MainActivity : AppCompatActivity() {
 
                     else
                     {
-                        Toast.makeText(this,"No Credentials.\n Enter OTP",Toast.LENGTH_LONG).show()
+                        Toast.makeText(this,"Please enter 4 digit OTP",Toast.LENGTH_LONG).show()
                     }
                 }
             }
