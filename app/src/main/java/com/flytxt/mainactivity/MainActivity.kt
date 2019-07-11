@@ -22,8 +22,8 @@ class MainActivity : AppCompatActivity() {
         if (session.isLoggedIn())
         {
             val i = Intent(applicationContext,Success::class.java)
-            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            //i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            //i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(i)
             finish()
         }
@@ -50,9 +50,6 @@ class MainActivity : AppCompatActivity() {
                         //Intent to start activity
                         session.createLoginSession(email, auth)
                         val intent = Intent(this, Success::class.java)
-
-                        intent.putExtra("Email", email)
-                        intent.putExtra("Token", auth)
 
                         startActivity(intent)
                         finish()
